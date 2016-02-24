@@ -1,0 +1,9 @@
+---
+- hosts: load-balancers
+  roles:
+    - load-balancer
+
+- hosts: hello-app-hosts
+  serial: 1
+  roles:
+    - hello-app

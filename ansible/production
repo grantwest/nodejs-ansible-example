@@ -1,0 +1,10 @@
+[all:children]
+load-balancers
+hello-app-hosts
+
+[load-balancers]
+lb1 ansible_host=
+
+[hello-app-hosts]
+hello1 ansible_host=
+hello2 ansible_host=

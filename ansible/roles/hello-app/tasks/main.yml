@@ -1,0 +1,21 @@
+---
+- name: install nodejs
+  apt: name=nodejs state=latest update_cache=yes cache_valid_time={{cache_valid_seconds}}
+
+- name: install npm
+  apt: name=npm state=latest
+
+- name: create web user
+  user: name=web
+
+- name: create project folder
+  file: path=/var/web group=web owner=web mode=755 state=directory
+
+- name: copy hello-app
+  synchronize: src=../../../../hello-app/ dest=/var/web/
+
+- name: setup hello-app as service
+  template: src=hello-app.conf dest=/etc/init/hello-app.conf group=root owner=root mode=644
+
+- name: restart hello-app
+  service: name=hello-app state=restarted
